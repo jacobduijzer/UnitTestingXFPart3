@@ -47,17 +47,17 @@ namespace UnitTestingXF.Tests.ServicesTests
 			
             var ex = Assert.ThrowsAsync<ArgumentNullException>(async () => await service.LoginAsync("", ""));
 
-			Assert.That(ex.Message, Is.EqualTo("Value cannot be null.\nParameter name: username"));
+			Assert.That(ex.Message, Is.EqualTo($"Value cannot be null.{Environment.NewLine}Parameter name: username"));
             Assert.That(ex.ParamName, Is.EqualTo("username"));
 
 			var ex2 = Assert.ThrowsAsync<ArgumentNullException>(async () => await service.LoginAsync("test@test.com", ""));
 
-			Assert.That(ex2.Message, Is.EqualTo("Value cannot be null.\nParameter name: password"));
+			Assert.That(ex2.Message, Is.EqualTo($"Value cannot be null.{Environment.NewLine}Parameter name: password"));
 			Assert.That(ex2.ParamName, Is.EqualTo("password"));
 
 			var ex3 = Assert.ThrowsAsync<ArgumentNullException>(async () => await service.LoginAsync("", "test1234!"));
 
-			Assert.That(ex3.Message, Is.EqualTo("Value cannot be null.\nParameter name: username"));
+			Assert.That(ex3.Message, Is.EqualTo($"Value cannot be null.{Environment.NewLine}Parameter name: username"));
 			Assert.That(ex3.ParamName, Is.EqualTo("username"));
 		}
 
