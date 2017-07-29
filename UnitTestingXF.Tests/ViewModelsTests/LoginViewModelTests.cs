@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnitTestingXF.Interfaces;
 using UnitTestingXF.Tests.Helpers;
 using UnitTestingXF.ViewModels;
+using UnitTestingXF.Views;
 
 namespace UnitTestingXF.Tests.ViewModelsTests
 {
@@ -35,21 +36,24 @@ namespace UnitTestingXF.Tests.ViewModelsTests
         [Test]
         public void VMCanConstruct()
         {
-            var vm = new LoginViewModel(_dependencyService);
+            var navigation = new NavigationStub();
+            var vm = new LoginViewModel(navigation, _dependencyService);
             Assert.AreEqual(typeof(LoginViewModel), vm.GetType());
         }
 
         [Test]
         public void CannotLoginWithEmptyFormTest()
         {
-            var vm = new LoginViewModel(_dependencyService);
+            var navigation = new NavigationStub();
+            var vm = new LoginViewModel(navigation, _dependencyService);
             Assert.IsFalse(vm.LoginCommand.CanExecute(null));
         }
 
         [Test]
         public void CanLoginWithValidFormTest()
         {
-            var vm = new LoginViewModel(_dependencyService);
+            var navigation = new NavigationStub();
+            var vm = new LoginViewModel(navigation, _dependencyService);
             Assert.IsFalse(vm.IsFormValid);
             Assert.IsFalse(vm.LoginCommand.CanExecute(null));
 
@@ -82,18 +86,22 @@ namespace UnitTestingXF.Tests.ViewModelsTests
         [Test]
         public void DoLoginWithCorrectValuesTest()
         {
-            var vm = new LoginViewModel(_dependencyService);
+            var navigation = new NavigationStub();
+            var vm = new LoginViewModel(navigation, _dependencyService);
             vm.Username = _correctUsername;
             vm.Password = _correctPassword;
 
             Assert.IsTrue(vm.LoginCommand.CanExecute(null));
             vm.LoginCommand.Execute(null);
+
+            Assert.AreEqual(typeof(HomeView), navigation.CurrentPage.GetType());
         }
 
 		[Test]
 		public void DoLoginWithIncorrectValuesTest()
 		{
-			var vm = new LoginViewModel(_dependencyService);
+            var navigation = new NavigationStub();
+			var vm = new LoginViewModel(navigation, _dependencyService);
             vm.Username = _wrongUsername;
             vm.Password = _wrongPassword;
 
@@ -101,6 +109,7 @@ namespace UnitTestingXF.Tests.ViewModelsTests
 			vm.LoginCommand.Execute(null);
             Assert.That(vm.ErrorMessage, Is.EqualTo("Error logging in"));
             Assert.That(vm.HasErrorMessage, Is.True);
+            Assert.IsNull(navigation.CurrentPage);
 
             vm.Username = string.Empty;
 
