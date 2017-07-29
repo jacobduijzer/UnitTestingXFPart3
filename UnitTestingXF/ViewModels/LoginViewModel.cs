@@ -6,20 +6,23 @@ using Xamarin.Forms;
 using UnitTestingXF.Helpers;
 using UnitTestingXF.Interfaces;
 using UnitTestingXF.Services;
+using UnitTestingXF.Views;
 
 namespace UnitTestingXF.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private INavigation _navigation;
         private CustomerService _customerService;
         
-		public LoginViewModel() : this(DependencyServiceWrapper.Instance)
+		public LoginViewModel(INavigation navigation) : this(navigation, DependencyServiceWrapper.Instance)
         {
 			// NO CODE HERE!
 		}
 
-		public LoginViewModel(IDependencyService dependencyService)
+		public LoginViewModel(INavigation navigation, IDependencyService dependencyService)
 		{
+            _navigation = navigation;
             _customerService = new CustomerService(dependencyService);
             LoginCommand = new Command(async () => await DoLoginAsync(), () => IsFormValid);
         }
@@ -68,7 +71,7 @@ namespace UnitTestingXF.ViewModels
                 {
 					if (await _customerService.LoginAsync(Username, Password))
 					{
-                        // TODO: implement navigation
+                        await _navigation.PushAsync(new HomeView());
 					}
                 }
                 catch (Exception ex)

@@ -11,7 +11,7 @@ namespace UnitTestingXF.Views
         {
             InitializeComponent();
 
-            BindingContext = vm = new LoginViewModel();
+            BindingContext = vm = new LoginViewModel(this.Navigation);
         }
     }
 }
