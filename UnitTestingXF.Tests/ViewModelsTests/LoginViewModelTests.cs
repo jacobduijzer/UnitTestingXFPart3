@@ -129,5 +129,31 @@ namespace UnitTestingXF.Tests.ViewModelsTests
 			Assert.That(vm.ErrorMessage, Is.Empty);
 			Assert.That(vm.HasErrorMessage, Is.False);
 		}
+
+        [Test]
+        public void CanGoToRegisterViewTest()
+        {
+            var navigation = new NavigationStub();
+            var vm = new LoginViewModel(navigation, _dependencyService);
+
+            Assert.That(vm.RegisterAccountCommand.CanExecute(null), Is.True);
+            vm.RegisterAccountCommand.Execute(null);
+
+            Assert.AreEqual(typeof(RegisterView), navigation.CurrentModalPage.GetType());
+            Assert.IsNull(navigation.CurrentPage);
+        }
+
+        [Test]
+        public void CanGoToForgotPasswordViewTest()
+        {
+            var navigation = new NavigationStub();
+            var vm = new LoginViewModel(navigation, _dependencyService);
+
+            Assert.That(vm.ForgotPasswordCommand.CanExecute(null), Is.True);
+            vm.ForgotPasswordCommand.Execute(null);
+
+            Assert.AreEqual(typeof(ForgotPasswordView), navigation.CurrentModalPage.GetType());
+            Assert.IsNull(navigation.CurrentPage);
+        }
     }
 }

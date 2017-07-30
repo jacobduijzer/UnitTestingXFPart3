@@ -9,6 +9,8 @@ namespace UnitTestingXF.Tests.Helpers
     {
         public Page CurrentPage { get; private set; }
 
+        public Page CurrentModalPage { get; private set; }
+
         public IReadOnlyList<Page> ModalStack => throw new NotImplementedException();
 
         public IReadOnlyList<Page> NavigationStack => throw new NotImplementedException();
@@ -58,14 +60,14 @@ namespace UnitTestingXF.Tests.Helpers
             await Task.FromResult(CurrentPage = page);
         }
 
-        public Task PushModalAsync(Page page)
+        public async Task PushModalAsync(Page page)
         {
-            throw new NotImplementedException();
+            await Task.FromResult(CurrentModalPage = page);
         }
 
-        public Task PushModalAsync(Page page, bool animated)
+        public async Task PushModalAsync(Page page, bool animated)
         {
-            throw new NotImplementedException();
+            await Task.FromResult(CurrentModalPage = page);
         }
 
         public void RemovePage(Page page)

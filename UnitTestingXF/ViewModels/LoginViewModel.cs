@@ -25,8 +25,8 @@ namespace UnitTestingXF.ViewModels
             _navigation = navigation;
             _customerService = new CustomerService(dependencyService);
             LoginCommand = new Command(async () => await DoLoginAsync(), () => IsFormValid);
-            ForgotPasswordCommand = new Command(async () => await _navigation.PushAsync(new ForgotPasswordView()));
-            RegisterAccountCommand = new Command(async () => await _navigation.PushAsync(new RegisterView()));
+            ForgotPasswordCommand = new Command(async () => await _navigation.PushModalAsync(new ForgotPasswordView()));
+            RegisterAccountCommand = new Command(async () => await _navigation.PushModalAsync(new RegisterView()));
         }
 
         public ICommand LoginCommand { get; private set; }

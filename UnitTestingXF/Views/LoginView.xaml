@@ -23,8 +23,12 @@
             </Entry>
 
             <Label Text="{Binding ErrorMessage}" IsVisible="{Binding HasErrorMessage}" TextColor="Red" Margin="20" />           
-            <Button Text="Log in" IsEnabled="{Binding IsFormValid}" Command="{Binding LoginCommand}" /> 
-         </StackLayout>            
+            <Button Text="Log in" IsEnabled="{Binding IsFormValid}" Command="{Binding LoginCommand}" />
+            
+            <Button Text="Forgot password" Command="{Binding ForgotPasswordCommand}" />
+
+            <Button Text="Register" Command="{Binding RegisterCommand}" />
+        </StackLayout>            
 
 	</ContentPage.Content>
 </ContentPage>

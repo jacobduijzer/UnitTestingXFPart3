@@ -13,7 +13,7 @@ namespace UnitTestingXF
 
             DependencyService.Register<ICustomerApi, FakeCustomerApi>();
 
-            MainPage = new LoginView();
+            MainPage = new NavigationPage(new LoginView());
         }
 
         protected override void OnStart()
