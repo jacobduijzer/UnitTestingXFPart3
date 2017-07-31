@@ -9,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 namespace UnitTestingXF.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForgotPasswordView : ContentPage
     {
         public ForgotPasswordView()
