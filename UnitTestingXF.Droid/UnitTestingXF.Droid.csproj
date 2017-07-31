@@ -39,6 +39,12 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UnitTest|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\UnitTest</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
